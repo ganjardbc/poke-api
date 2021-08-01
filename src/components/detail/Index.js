@@ -132,16 +132,7 @@ class App extends Component {
                                 </div>
                             </div>
 
-                            <div className="card box-shadow">
-                                <div style={{ marginBottom: 15 }}>
-                                    <div className="fonts fonts-12 semibold black">Stats</div>
-                                </div>
-                                <div style={{ width: '100%', height: 400 }} className="fonts fonts-11 black">
-                                    <BarChart data={dataStats ? dataStats : []} />
-                                </div>
-                            </div>
-
-                            <div className="card box-shadow">
+                            <div className="card box-shadow" style={{ marginBottom: 15 }}>
                                 <div style={{ marginBottom: 10 }}>
                                     <div className="fonts fonts-12 semibold black">Moves</div>
                                 </div>
@@ -155,6 +146,15 @@ class App extends Component {
                                             </div>
                                         )
                                     })}
+                                </div>
+                            </div>
+
+                            <div className="card box-shadow">
+                                <div style={{ marginBottom: 15 }}>
+                                    <div className="fonts fonts-12 semibold black">Stats</div>
+                                </div>
+                                <div style={{ width: '100%', height: 400 }} className="fonts fonts-11 black">
+                                    <BarChart data={dataStats ? dataStats : []} />
                                 </div>
                             </div>
 

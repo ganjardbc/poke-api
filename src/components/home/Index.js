@@ -22,7 +22,7 @@ class App extends Component {
     }
 
     getData (limit, offset) {
-        this.setState({ visibleLoader: true  })
+        this.setState({ visibleLoader: true, visibleLoaderMore: false })
 
         const limitOffset = 'limit=' + limit + '&offset=' + offset
 
@@ -60,7 +60,7 @@ class App extends Component {
                 this.setState({ visibleLoaderMore: true })
             }
         }).finally(() => {
-            this.setState({ visibleLoader: false })
+            this.setState({ visibleLoader: false, visibleLoaderMore: true })
         })
     }
 
