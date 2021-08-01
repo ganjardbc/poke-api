@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.818840c1.chunk.css",
-    "main.js": "/static/js/main.7435e93d.chunk.js",
-    "main.js.map": "/static/js/main.7435e93d.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.79419ed6.js",
-    "runtime-main.js.map": "/static/js/runtime-main.79419ed6.js.map",
-    "static/js/2.59a96843.chunk.js": "/static/js/2.59a96843.chunk.js",
-    "static/js/2.59a96843.chunk.js.map": "/static/js/2.59a96843.chunk.js.map",
-    "static/js/3.fcf4e3af.chunk.js": "/static/js/3.fcf4e3af.chunk.js",
-    "static/js/3.fcf4e3af.chunk.js.map": "/static/js/3.fcf4e3af.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.818840c1.chunk.css.map": "/static/css/main.818840c1.chunk.css.map",
-    "static/js/2.59a96843.chunk.js.LICENSE.txt": "/static/js/2.59a96843.chunk.js.LICENSE.txt",
-    "static/media/app.css": "/static/media/ViaodaLibre-Regular.8a7167d0.ttf",
-    "static/media/all.min.css": "/static/media/fa-solid-900.ec056eb5.woff",
-    "static/media/pokeapi_logo.888baca4.png": "/static/media/pokeapi_logo.888baca4.png"
+    "main.css": "/poke-api/static/css/main.45a4ad9b.chunk.css",
+    "main.js": "/poke-api/static/js/main.7435e93d.chunk.js",
+    "main.js.map": "/poke-api/static/js/main.7435e93d.chunk.js.map",
+    "runtime-main.js": "/poke-api/static/js/runtime-main.2743d2a4.js",
+    "runtime-main.js.map": "/poke-api/static/js/runtime-main.2743d2a4.js.map",
+    "static/js/2.59a96843.chunk.js": "/poke-api/static/js/2.59a96843.chunk.js",
+    "static/js/2.59a96843.chunk.js.map": "/poke-api/static/js/2.59a96843.chunk.js.map",
+    "static/js/3.fcf4e3af.chunk.js": "/poke-api/static/js/3.fcf4e3af.chunk.js",
+    "static/js/3.fcf4e3af.chunk.js.map": "/poke-api/static/js/3.fcf4e3af.chunk.js.map",
+    "index.html": "/poke-api/index.html",
+    "static/css/main.45a4ad9b.chunk.css.map": "/poke-api/static/css/main.45a4ad9b.chunk.css.map",
+    "static/js/2.59a96843.chunk.js.LICENSE.txt": "/poke-api/static/js/2.59a96843.chunk.js.LICENSE.txt",
+    "static/media/app.css": "/poke-api/static/media/ViaodaLibre-Regular.8a7167d0.ttf",
+    "static/media/all.min.css": "/poke-api/static/media/fa-solid-900.ec056eb5.woff",
+    "static/media/pokeapi_logo.888baca4.png": "/poke-api/static/media/pokeapi_logo.888baca4.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.79419ed6.js",
+    "static/js/runtime-main.2743d2a4.js",
     "static/js/2.59a96843.chunk.js",
-    "static/css/main.818840c1.chunk.css",
+    "static/css/main.45a4ad9b.chunk.css",
     "static/js/main.7435e93d.chunk.js"
   ]
 }
