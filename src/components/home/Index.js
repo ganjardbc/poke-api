@@ -11,7 +11,7 @@ class App extends Component {
             count: 0,
             visibleLoader: false,
             visibleLoaderMore: false,
-            limit: 15,
+            limit: 45,
             offset: 0
         }
 	}

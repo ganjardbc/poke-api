@@ -48,6 +48,17 @@ class App extends Component {
         console.log('url', url)
         return (
             <div style={{ paddingTop: 20, paddingBottom: 15 }}>
+                <div id="navbar">
+					<div id="navbar-container" className="display-flex left align-center">
+						<div>
+                            <button className="btn btn-icon btn-white" onClick={() => this.props.history.goBack()}>
+                                <i className="fa fa-lw fa-arrow-left" />
+                            </button>
+                        </div>
+                        <div className="fonts fonts-12 semibold black" style={{ marginLeft: 10 }}>{ url }</div>
+					</div>
+				</div>
+
                 {visibleLoader ? (
                     <Loader />
                 ) : (

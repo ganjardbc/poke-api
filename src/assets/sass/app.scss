@@ -160,6 +160,26 @@ a {
             }
         }
     }
+    #navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 70px;
+        background-color: #fff;
+        z-index: 100;
+        #navbar-container {
+            position: relative;
+            width: $max-width;
+            padding-top: 14px;
+            margin: auto;
+            @media (max-width: $min-width) {
+                width: calc(100% - 30px);
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+    }
 
     // text
     .title {
