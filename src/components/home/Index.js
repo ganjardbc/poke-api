@@ -86,11 +86,11 @@ class App extends Component {
                                                     <i className="post-center icn fa fa-lw fa-vr-cardboard" />
                                                 </div>
                                             </div>
-                                            <div style={{ width: 'calc(100% - 120px)' }}>
+                                            <div style={{ width: 'calc(100% - 115px)' }}>
                                                 <h2 className="fonts fonts-12 semibold black">{ dt.name }</h2>
                                                 <p className="fonts fonts-10 grey word-break">{ dt.url }</p>
                                             </div>
-                                            <div style={{ width: 45, height: 45, marginLeft: 15, paddingTop: 2.5 }}>
+                                            <div style={{ width: 40, height: 40, marginLeft: 15, paddingTop: 2.5 }}>
                                                 <NavLink to={ '/detail/' + dt.name }>
                                                     <button className="btn btn-sekunder btn-icon">
                                                         <i className="fa fa-lw fa-arrow-right" />
