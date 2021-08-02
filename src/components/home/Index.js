@@ -44,7 +44,7 @@ class App extends Component {
             })
 
             if (currentData.length > 0) {
-                let currentOffset = offset + 1
+                let currentOffset = offset + limit
 
                 this.setState({ 
                     datas: data, 
