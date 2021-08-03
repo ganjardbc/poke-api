@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { graphql } from "react-apollo"
 import gql from "graphql-tag"
-import axios from 'axios'
 import Loader from '../modules/Loader'
 
 class App extends Component {
@@ -28,7 +27,7 @@ class App extends Component {
     componentDidMount () {
         const {data} = this.props
         console.log('props', data)
-        
+
         const {limit, offset} = this.state
         this.getDataGraphql(limit, offset)
     }
