@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import Loader from '../modules/Loader'
 import BarChart from '../modules/BarChart'
 
@@ -14,24 +13,87 @@ class App extends Component {
 
     componentDidMount () {
         let { url } = this.props.match.params
-        this.getData(url)
+        this.getDataGraphql(url)
     }
 
-    getData (url) {
+    getDataGraphql (url) {
         this.setState({ visibleLoader: true  })
 
-        axios.get('https://pokeapi.co/api/v2/pokemon/' + url).then((res) => {
-            console.log('res', res.data)
-            const data = res.data
+        let query = `query samplePokeAPIquery($url: String) {
+            pokemons: pokemon_v2_pokemon(where: {name: {_eq: $url}}) {
+                id
+                is_default
+                name
+                order
+                height
+                base_experience
+                pokemon_species_id
+                weight
+                species: pokemon_v2_pokemonspecy {
+                    name
+                    id
+                }
+                abilities: pokemon_v2_pokemonabilities(distinct_on: id) {
+                    id
+                    ability_id
+                    ability: pokemon_v2_ability {
+                        name
+                        id
+                    }
+                }
+                types: pokemon_v2_pokemontypes(distinct_on: id) {
+                    id
+                    type_id
+                    type: pokemon_v2_type {
+                        name
+                        id
+                    }
+                }
+                moves: pokemon_v2_pokemonmoves(distinct_on: level) {
+                    level
+                    id
+                    move: pokemon_v2_move {
+                        name
+                        id
+                    }
+                }
+                stats: pokemon_v2_pokemonstats(distinct_on: id) {
+                    id
+                    base_stat
+                    effort
+                    stat_id
+                    stat: pokemon_v2_stat {
+                        name
+                        id 
+                    }
+                }
+            }
+        }`
+
+        fetch('https://beta.pokeapi.co/graphql/v1beta/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                query,
+                variables: { url }
+            })
+        })
+        .then(r => r.json())
+        .then((res) => {
+            console.log('res', res.data.pokemons[0])
+            const data = res.data.pokemons[0]
 
             this.setState({ 
                 visibleLoader: false,
                 data: data 
             })
-        }).finally(() => {
+        })
+        .finally(() => {
             this.setState({ visibleLoader: false })
         })
-
     }
 
     render () {
@@ -44,8 +106,6 @@ class App extends Component {
                 effort: dt.effort,
             }
         })
-
-        console.log('url', url)
         return (
             <div style={{ paddingTop: 20, paddingBottom: 15 }}>
                 <div id="navbar">

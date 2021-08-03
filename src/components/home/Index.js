@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+import { graphql } from "react-apollo"
+import gql from "graphql-tag"
 import axios from 'axios'
 import Loader from '../modules/Loader'
 
@@ -16,15 +18,23 @@ class App extends Component {
         }
 	}
 
-    componentDidMount () {
-        const {limit, offset} = this.state
-        this.getData(limit, offset)
+    componentDidUpdate (prevProps) {
+        if (prevProps.data !== this.props.data) {
+            const {data} = this.props
+            console.log('props', data)
+        }
     }
 
-    getData (limit, offset) {
-        this.setState({ visibleLoader: true, visibleLoaderMore: false })
+    componentDidMount () {
+        const {data} = this.props
+        console.log('props', data)
+        
+        const {limit, offset} = this.state
+        this.getDataGraphql(limit, offset)
+    }
 
-        const limitOffset = 'limit=' + limit + '&offset=' + offset
+    getDataGraphql (limit, offset) {
+        this.setState({ visibleLoader: true, visibleLoaderMore: false })
 
         let data = []
         if (offset > 0) {
@@ -33,11 +43,35 @@ class App extends Component {
             data = []
         }
 
+        let query = `query samplePokeAPIquery($limit: Int, $offset: Int) {
+            pokemons: pokemon_v2_pokemon(order_by: {id: asc}, limit: $limit, offset: $offset) {
+                id
+                is_default
+                name
+                order
+                weight
+                height
+                base_experience
+                pokemon_species_id
+            }
+        }`
 
-        axios.get('https://pokeapi.co/api/v2/pokemon?' + limitOffset).then((res) => {
+        fetch('https://beta.pokeapi.co/graphql/v1beta/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                query,
+                variables: { limit, offset }
+            })
+        })
+        .then(r => r.json())
+        .then((res) => {
             console.log('res', res.data)
 
-            let currentData = res.data.results
+            let currentData = res.data.pokemons
 
             currentData && currentData.map((dt) => {
                 return data.push({ ...dt })
@@ -66,7 +100,7 @@ class App extends Component {
 
     loadMore () {
         const {limit, offset} = this.state
-        this.getData(limit, offset)
+        this.getDataGraphql(limit, offset)
     }
 
 	render () {
@@ -88,7 +122,14 @@ class App extends Component {
                                             </div>
                                             <div style={{ width: 'calc(100% - 115px)' }}>
                                                 <h2 className="fonts fonts-12 semibold black">{ dt.name }</h2>
-                                                <p className="fonts fonts-10 grey word-break">{ dt.url }</p>
+                                                <div className="display-flex wrap fonts fonts-10 grey word-break">
+                                                    <div style={{width: 80}}>Weight</div>
+                                                    <div style={{width: 'calc(100% - 80px)'}}>: { dt.weight }</div>
+                                                </div>
+                                                <div className="display-flex wrap fonts fonts-10 grey word-break">
+                                                    <div style={{width: 80}}>Height</div>
+                                                    <div style={{width: 'calc(100% - 80px)'}}>: { dt.height }</div>
+                                                </div>
                                             </div>
                                             <div style={{ width: 40, height: 40, marginLeft: 15, paddingTop: 2.5 }}>
                                                 <NavLink to={ '/detail/' + dt.name }>
@@ -121,4 +162,32 @@ class App extends Component {
 	}
 }
 
-export default App
+const queries = gql`
+query samplePokeAPIquery($limit: Int, $offset: Int) {
+    gen3_species: pokemon_v2_pokemonspecies(where: {pokemon_v2_pokemons: {}}, order_by: {id: asc}, limit: $limit, offset: $offset) {
+        id
+        name
+    }
+    generations: pokemon_v2_generation {
+        id
+        name
+        pokemon_species: pokemon_v2_pokemonspecies_aggregate {
+            aggregate {
+                count
+            }
+        }
+    }
+    pokemons: pokemon_v2_pokemon(limit: $limit, offset: $offset) {
+        id
+        name
+    }
+}`
+
+export default graphql(queries, {
+    options: {
+        variables: {
+            limit: 40,
+            offset: 40
+        }
+    }
+})(App)
